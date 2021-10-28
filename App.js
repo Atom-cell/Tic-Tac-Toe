@@ -3,10 +3,10 @@ import { Pressable, StyleSheet, Text, View, Button } from "react-native";
 import Modal from "./modal";
 
 export default function App() {
-  const [symbols, setS] = React.useState([]);
-  const [win1, setWin1] = React.useState([]);
-  const [win2, setWin2] = React.useState([]);
-  const [win3, setWin3] = React.useState([]);
+  let [symbols, setS] = React.useState([]);
+  let [win1, setWin1] = React.useState([]);
+  let [win2, setWin2] = React.useState([]);
+  let [win3, setWin3] = React.useState([]);
 
   const [b1, setb1] = React.useState("-");
   const [b2, setb2] = React.useState("-");
@@ -26,35 +26,43 @@ export default function App() {
     console.log("r3", win3);
 
     let s = symbols[symbols.length - 1];
-    // if (win1[0] == s && win1[1] == s && win1[2] == s) {
-    //   //R1
-    //   alert(1);
-    // } else if (win2[0] === s && win2[1] === s && win2[2] === s) {
-    //   //R2
-    //   alert(2);
-    // } else if (win3[0] === n && win3[1] === n && win3[2] === n) {
-    //   //R3
-    //   alert(3);
-    // } else if (win1[0] === n && win2[0] === n && win3[0] === n) {
-    //   //C1
-    //   alert(4);
-    // } else if (win1[1] === n && win2[1] === n && win3[1] === n) {
-    //   //C2
-    //   alert(5);
-    // } else if (win1[2] === n && win2[2] === n && win3[2] === n) {
-    //   //C3
-    //   alert(6);
-    // } else if (win1[0] === n && win2[1] === n && win3[2] === n) {
-    //   //D1
-    //   alert("D1");
-    // } else if (win1[2] === n && win2[1] === n && win3[0] === n) {
-    //   //D2
-    //   alert("D2");
-    // }
+    if (win1[0] == s && win1[1] == s && win1[2] == s) {
+      //R1
+      alert(1);
+      setModal(true);
+    } else if (win2[0] === s && win2[1] === s && win2[2] === s) {
+      //R2
+      alert(2);
+      setModal(true);
+    } else if (win3[0] === n && win3[1] === n && win3[2] === n) {
+      //R3
+      alert(3);
+      setModal(true);
+    } else if (win1[0] === n && win2[0] === n && win3[0] === n) {
+      //C1
+      alert(4);
+      setModal(true);
+    } else if (win1[1] === n && win2[1] === n && win3[1] === n) {
+      //C2
+      alert(5);
+      setModal(true);
+    } else if (win1[2] === n && win2[2] === n && win3[2] === n) {
+      //C3
+      alert(6);
+      setModal(true);
+    } else if (win1[0] === n && win2[1] === n && win3[2] === n) {
+      //D1
+      alert("D1");
+      setModal(true);
+    } else if (win1[2] === n && win2[1] === n && win3[0] === n) {
+      //D2
+      alert("D2");
+      setModal(true);
+    }
   };
 
-  const hideModal = () => {
-    setModal(!modal);
+  const hideModal = (k) => {
+    setModal(k);
   };
 
   const change = (n) => {
@@ -230,7 +238,6 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      {modal ? <Modal show={true} hideModal={hideModal} /> : null}
       <View>
         <View style={styles.p2Wrapper}>
           <Text style={styles.p2}>PLAYER 2: O</Text>
@@ -326,6 +333,13 @@ export default function App() {
         </View>
         <Button title="click" onPress={() => alert(win2)} />
       </View>
+      {modal ? (
+        <Modal
+          show={true}
+          hideModal={hideModal}
+          symbol={symbols[symbols.length - 1]}
+        />
+      ) : null}
     </View>
   );
 }

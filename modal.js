@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Alert, StyleSheet, Text, Pressable, View } from "react-native";
 
-const Modal = ({ show }) => {
+const Modal = ({ show, hideModal, symbol }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -16,12 +16,17 @@ const Modal = ({ show }) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>
+              {symbol === "X" ? "Player 1 Wins" : "Player 2 Wins"}
+            </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                hideModal(false);
+              }}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Play Again</Text>
             </Pressable>
           </View>
         </View>
