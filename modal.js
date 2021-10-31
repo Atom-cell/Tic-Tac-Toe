@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet, Text, Pressable, View } from "react-native";
+import { StyleSheet, Text, Pressable, View, Modal } from "react-native";
 
-const Modal = ({ show, hideModal, symbol }) => {
+const ShowModal = ({ show, hideModal, symbol }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
+      <Modal animationType="slide" transparent={true} visible={show}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>
@@ -23,7 +15,7 @@ const Modal = ({ show, hideModal, symbol }) => {
               style={[styles.button, styles.buttonClose]}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                hideModal(false);
+                hideModal();
               }}
             >
               <Text style={styles.textStyle}>Play Again</Text>
@@ -31,26 +23,22 @@ const Modal = ({ show, hideModal, symbol }) => {
           </View>
         </View>
       </Modal>
-
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(show)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
+    position: "absolute",
+    top: "35%",
+    left: "18%",
+    flex: 0.7,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    // marginTop: 22,
   },
   modalView: {
-    margin: 20,
+    // margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
@@ -66,7 +54,7 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: 20,
     elevation: 2,
   },
   buttonOpen: {
@@ -79,11 +67,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    fontSize: 20,
   },
   modalText: {
     marginBottom: 15,
+    fontSize: 30,
     textAlign: "center",
   },
 });
 
-export default Modal;
+export default ShowModal;

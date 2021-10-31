@@ -1,0 +1,34 @@
+#1 - Pushing in State variable that is type Array
+
+to push in a simple array where index doesnt matter:
+setArray([...Array, newElement])
+
+to push in an array where index matters
+let a = [...array]
+a[index] = new newElement
+setArray(a)
+=====================================================
+
+#2 - Sending a Function as a prop
+
+<Component function={function} /> ==> no ()
+
+=====================================================
+
+#3 - Count wasnt updating
+
+setCount(count ++) ==> wasnt working
+setCount(count => count + 1) ==> WORKED
+
+=====================================================
+
+#4 - Using Assets
+
+require(./assets/asset name)
+
+=====================================================
+
+#5 - State variables dont update instantly
+
+useEffect() is the solution
+Here the board was one step behind. so to refresh it is used useEffect()
